@@ -22,7 +22,7 @@ export const Form = styled.form`
 
   > h2 {
     font-size: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin: 3rem 0;
   }
 
   > p {
