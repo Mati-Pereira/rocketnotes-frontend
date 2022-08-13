@@ -1,6 +1,9 @@
 import Header from "../../components/Header";
 import Input from "../../components/Input";
 import TextArea from "../../components/TextArea";
+import NoteItem from "../../components/NoteItem";
+import Section from "../../components/Section";
+import Button from "../../components/Button";
 
 import { Container, Form } from "./styles";
 
@@ -16,6 +19,17 @@ function New() {
           </header>
           <Input placeholder="Título" />
           <TextArea placeholder="Observações" />
+          <Section title="Links úteis">
+            <NoteItem value="www.site.com.br" />
+            <NoteItem isNew placeholder="Novo Link" />
+          </Section>
+          <Section title="marcadores">
+            <div className="tags">
+              <NoteItem value="react" />
+              <NoteItem isNew placeholder="Nova Tag" />
+            </div>
+          </Section>
+          <Button title="Salvar"/>
         </Form>
       </main>
     </Container>
