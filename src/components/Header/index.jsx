@@ -3,7 +3,7 @@ import { RiShutDownLine } from "react-icons/ri";
 function Header() {
   return (
     <Container>
-      <Profile>
+      <Profile to="/profile">
         <img src="https://github.com/Mati-Pereira.png" alt="profile" />
         <div>
           <span>Bem Vindo </span>

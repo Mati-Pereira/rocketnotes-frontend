@@ -7,6 +7,8 @@ import Button from "../../components/Button";
 
 import { Container, Form } from "./styles";
 
+import {Link} from 'react-router-dom'
+
 function New() {
   return (
     <Container>
@@ -15,7 +17,7 @@ function New() {
         <Form>
           <header>
             <h1>Criar Nota</h1>
-            <a href="/">Voltar</a>
+            <Link to="/">Voltar</Link>
           </header>
           <Input placeholder="Título" />
           <TextArea placeholder="Observações" />
