@@ -7,9 +7,18 @@ import Button from "../../components/Button";
 
 import { Container, Form } from "./styles";
 
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
+
+import { useState } from "react";
 
 function New() {
+  const [links, setLinks] = useState([]);
+  const [newLink, setNewLink] = useState("");
+
+  function handleAdd() {
+    setLinks((prevState) => [...prevState, newLink]);
+  }
+  
   return (
     <Container>
       <Header />
@@ -31,7 +40,7 @@ function New() {
               <NoteItem isNew placeholder="Nova Tag" />
             </div>
           </Section>
-          <Button title="Salvar"/>
+          <Button title="Salvar" />
         </Form>
       </main>
     </Container>
