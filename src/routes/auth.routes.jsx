@@ -6,7 +6,7 @@ import Signup from "../pages/Signup";
 function AuthRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Signin />} />
+      <Route index path="/" element={<Signin />} />
       <Route path="/register" element={<Signup />} />
     </Routes>
   );
