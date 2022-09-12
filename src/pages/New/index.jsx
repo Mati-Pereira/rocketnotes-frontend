@@ -15,10 +15,27 @@ function New() {
   const [links, setLinks] = useState([]);
   const [newLink, setNewLink] = useState("");
 
-  function handleAdd() {
+  const [tags, setTags] = useState([]);
+  const [newTag, setNewTag] = useState("");
+
+  function handleAddLink() {
     setLinks((prevState) => [...prevState, newLink]);
+    setNewLink("");
   }
-  
+
+  function handleRemoveLink(deleted) {
+    setLinks((prevState) => prevState.filter((link) => link !== deleted));
+  }
+
+  function handleAddTag() {
+    setTags((prevState) => [...prevState, newTag]);
+    setNewTag("");
+  }
+
+  function handleRemoveTag(newTag) {
+    setTags((prevState) => prevState.filter((link) => link !== newTag));
+  }
+
   return (
     <Container>
       <Header />
@@ -31,13 +48,37 @@ function New() {
           <Input placeholder="Título" />
           <TextArea placeholder="Observações" />
           <Section title="Links úteis">
-            <NoteItem value="www.site.com.br" />
-            <NoteItem isNew placeholder="Novo Link" />
+            {links.map((link, index) => (
+              <NoteItem
+                key={String(index)}
+                value={link}
+                onClick={() => handleRemoveLink(link)}
+              />
+            ))}
+            <NoteItem
+              isNew
+              placeholder="Novo Link"
+              value={newLink}
+              onChange={(e) => setNewLink(e.target.value)}
+              onClick={handleAddLink}
+            />
           </Section>
           <Section title="marcadores">
             <div className="tags">
-              <NoteItem value="react" />
-              <NoteItem isNew placeholder="Nova Tag" />
+              {tags.map((tag, index) => (
+                <NoteItem
+                  key={String(index)}
+                  value={tag}
+                  onClick={() => handleRemoveTag(tag)}
+                />
+              ))}
+              <NoteItem
+                isNew
+                onChange={(e) => setNewTag(e.target.value)}
+                value={newTag}
+                onClick={handleAddTag}
+                placeholder="Nova Marcador"
+              />
             </div>
           </Section>
           <Button title="Salvar" />
