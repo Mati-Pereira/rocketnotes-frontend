@@ -19,7 +19,7 @@ function Header() {
         />
         <div>
           <span>Bem Vindo </span>
-          <strong>Matheus Rodrigues</strong>
+          <strong>{user.name}</strong>
         </div>
       </Profile>
       <Logout onClick={logOut}>
