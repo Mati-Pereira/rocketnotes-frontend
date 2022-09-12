@@ -2,7 +2,6 @@ import { Container } from "./styles";
 import Tag from "../Tag";
 
 function Note({ data, ...rest }) {
-  console.log(data)
   return (
     <Container {...rest}>
       <h1>{data.title}</h1>
