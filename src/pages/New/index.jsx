@@ -1,3 +1,10 @@
+import { useState } from "react";
+
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import { api } from "../../services/api";
+
 import Header from "../../components/Header";
 import Input from "../../components/Input";
 import TextArea from "../../components/TextArea";
@@ -7,11 +14,12 @@ import Button from "../../components/Button";
 
 import { Container, Form } from "./styles";
 
-import { Link } from "react-router-dom";
-
-import { useState } from "react";
-
 function New() {
+  let navigate = useNavigate();
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+
   const [links, setLinks] = useState([]);
   const [newLink, setNewLink] = useState("");
 
@@ -32,8 +40,20 @@ function New() {
     setNewTag("");
   }
 
-  function handleRemoveTag(newTag) {
-    setTags((prevState) => prevState.filter((link) => link !== newTag));
+  function handleRemoveTag(deleted) {
+    setTags((prevState) => prevState.filter((link) => link !== deleted));
+  }
+
+  async function handleNewNote() {
+    await api.post("/notes", {
+      title,
+      description,
+      tags,
+      links,
+    });
+
+    alert("New note added");
+    navigate("/");
   }
 
   return (
@@ -45,8 +65,14 @@ function New() {
             <h1>Criar Nota</h1>
             <Link to="/">Voltar</Link>
           </header>
-          <Input placeholder="Título" />
-          <TextArea placeholder="Observações" />
+          <Input
+            placeholder="Título"
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <TextArea
+            placeholder="Observações"
+            onChange={(e) => setDescription(e.target.value)}
+          />
           <Section title="Links úteis">
             {links.map((link, index) => (
               <NoteItem
@@ -81,7 +107,7 @@ function New() {
               />
             </div>
           </Section>
-          <Button title="Salvar" />
+          <Button title="Salvar" onClick={handleNewNote} />
         </Form>
       </main>
     </Container>
