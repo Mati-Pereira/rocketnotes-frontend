@@ -45,6 +45,25 @@ function New() {
   }
 
   async function handleNewNote() {
+    if (!title) {
+      return alert("Não foi colocado um título");
+    }
+
+    if (!description) {
+      return alert("Não foi colocado uma descrição");
+    }
+
+    if (newTag) {
+      return alert(
+        "Você deixou uma ou mais no campo para adicionar, mas não clicou em adicionar"
+      );
+    }
+
+    if (newLink) {
+      return alert(
+        "Você deixou uma ou mais no campo para adicionar, mas não clicou em adicionar"
+      );
+    }
     await api.post("/notes", {
       title,
       description,
@@ -52,8 +71,8 @@ function New() {
       links,
     });
 
-    alert("New note added");
-    navigate("/");
+    alert("Nova Nota Adicionada");
+    navigate(-1);
   }
 
   return (
