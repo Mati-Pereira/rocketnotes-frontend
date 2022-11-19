@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-import { Container, Links, Content } from "./styles";
 import Button from "../../components/Button";
 import ButtonText from "../../components/ButtonText";
 import Header from "../../components/Header";
 import Section from "../../components/Section";
 import Tag from "../../components/Tag";
+import { Container, Content, Links } from "./styles";
 
 import { api } from "../../services/api";
 

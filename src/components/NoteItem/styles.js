@@ -12,6 +12,7 @@ export const Container = styled.div`
   margin-bottom: 0.5rem;
   border-radius: 10px;
   padding-right: 1rem;
+  
 
   > button {
     border: none;
@@ -25,7 +26,7 @@ export const Container = styled.div`
   .button-add {
     color: ${({ theme }) => theme.COLORS.ORANGE};
   }
-  
+
   > input {
     height: 3.5rem;
     width: 100%;

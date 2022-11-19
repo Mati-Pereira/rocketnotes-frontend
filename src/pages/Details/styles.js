@@ -12,6 +12,9 @@ export const Container = styled.div`
     grid-area: content;
     overflow-y: scroll;
     padding: 4rem 0;
+    @media screen and (max-width: 480px) {
+      padding: 2rem;
+    }
   }
 `;
 
@@ -31,16 +34,19 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
 
-  > button:first-child{
+  > button:first-child {
     align-self: end;
   }
 
-  > h1{
+  > h1 {
     font-size: 2.25rem;
     font-weight: 500;
     padding-top: 4rem;
+    @media screen and (max-width: 480px) {
+      margin-top: -3rem;
+    }
   }
-  >p{
+  > p {
     font-size: 1rem;
     margin-top: 1rem;
     text-align: justify;

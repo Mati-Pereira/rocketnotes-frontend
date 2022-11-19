@@ -1,16 +1,15 @@
 import { useState } from "react";
 
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { api } from "../../services/api";
 
+import Button from "../../components/Button";
 import Header from "../../components/Header";
 import Input from "../../components/Input";
-import TextArea from "../../components/TextArea";
 import NoteItem from "../../components/NoteItem";
 import Section from "../../components/Section";
-import Button from "../../components/Button";
+import TextArea from "../../components/TextArea";
 
 import { Container, Form } from "./styles";
 
@@ -27,8 +26,10 @@ function New() {
   const [newTag, setNewTag] = useState("");
 
   function handleAddLink() {
-    setLinks((prevState) => [...prevState, newLink]);
-    setNewLink("");
+    if (newLink.length) {
+      setLinks((prevState) => [...prevState, newLink]);
+      setNewLink("");
+    }
   }
 
   function handleRemoveLink(deleted) {
@@ -36,8 +37,10 @@ function New() {
   }
 
   function handleAddTag() {
-    setTags((prevState) => [...prevState, newTag]);
-    setNewTag("");
+    if (newTag.length) {
+      setTags((prevState) => [...prevState, newTag]);
+      setNewTag("");
+    }
   }
 
   function handleRemoveTag(deleted) {
