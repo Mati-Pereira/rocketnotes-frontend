@@ -2,11 +2,11 @@ import { useState } from "react";
 
 import { Link } from "react-router-dom";
 
-import { Container, Form, Background } from "./styles";
-import { FiMail, FiLock } from "react-icons/fi";
+import { FiLock, FiMail } from "react-icons/fi";
+import { Background, Container, Form } from "./styles";
 
-import Input from "../../components/Input";
 import Button from "../../components/Button";
+import Input from "../../components/Input";
 
 import { useAuth } from "../../hooks/auth";
 

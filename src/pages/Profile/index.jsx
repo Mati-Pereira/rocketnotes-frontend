@@ -1,16 +1,11 @@
 import { useState } from "react";
-
-import { FiArrowLeft, FiUser, FiMail, FiLock, FiCamera } from "react-icons/fi";
-
-import { Container, Form, Avatar } from "./styles";
-
-import Input from "../../components/Input";
-import Button from "../../components/Button";
-
+import { FiArrowLeft, FiCamera, FiLock, FiMail, FiUser } from "react-icons/fi";
 import { Link } from "react-router-dom";
-
+import Button from "../../components/Button";
+import Input from "../../components/Input";
 import { useAuth } from "../../hooks/auth";
 import { api } from "../../services/api";
+import { Avatar, Container, Form } from "./styles";
 
 import avatarPlaceholder from "../../assets/svgs/avatar_placeholder.svg";
 

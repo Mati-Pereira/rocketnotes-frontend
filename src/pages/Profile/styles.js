@@ -9,6 +9,9 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     padding: 0 7.75rem;
+    @media screen and (max-width: 480px) {
+      padding: 0 2rem;
+    }
     svg {
       color: ${({ theme }) => theme.COLORS.GRAY_100};
       font-size: 1.5rem;
@@ -19,8 +22,11 @@ export const Container = styled.div`
 export const Form = styled.form`
   max-width: 340px;
   margin: -6.5rem auto 0;
-  div:nth-child(4){
+  div:nth-child(4) {
     margin-top: 1.5rem;
+  }
+  @media screen and (max-width: 480px) {
+    max-width: 250px;
   }
 `;
 

@@ -34,6 +34,10 @@ export const Form = styled.form`
     color: ${({ theme }) => theme.COLORS.ORANGE};
     margin-top: 7.75rem;
   }
+  @media screen and (max-width: 480px) {
+    padding: 0 2rem;
+    gap: 0.5rem
+  }
 `;
 
 export const Background = styled.div`
@@ -41,4 +45,7 @@ export const Background = styled.div`
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url(${backgroundImg});
   background-size: cover;
+  @media screen and (max-width: 480px) {
+    display: none;
+  }
 `;

@@ -1,22 +1,29 @@
-import { useState, useEffect } from "react";
-
-import { useNavigate } from "react-router-dom";
-
+import { useEffect, useState } from "react";
+import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai";
 import { FiPlus, FiSearch } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
+import ButtonText from "../../components/ButtonText";
 import Header from "../../components/Header";
 import Input from "../../components/Input";
-import ButtonText from "../../components/ButtonText";
-import Section from "../../components/Section";
 import Note from "../../components/Note";
-
-import { Container, Brand, Menu, Search, Content, NewNote } from "./styles";
+import Section from "../../components/Section";
 import { api } from "../../services/api";
+import {
+  Brand,
+  Container,
+  Content,
+  Menu,
+  NewNote,
+  Search,
+  Toggler,
+} from "./styles";
 
 function Home() {
   const [search, setSearch] = useState("");
   const [tags, setTags] = useState([]);
   const [tagsSelected, setTagsSelected] = useState([]);
   const [notes, setNotes] = useState([]);
+  const [showTags, setShowTags] = useState(true);
 
   const navigate = useNavigate();
 
@@ -69,17 +76,24 @@ function Home() {
             isActive={tagsSelected.length === 0}
           />
         </li>
-
-        {tags &&
-          tags.map((tag) => (
-            <li key={String(tag.id)}>
-              <ButtonText
-                title={tag.name}
-                onClick={() => handleTagSelected(tag.name)}
-                isActive={tagsSelected.includes(tag.name)}
-              />
-            </li>
-          ))}
+        {tags && showTags
+          ? tags.map((tag) => (
+              <li key={String(tag.id)}>
+                <ButtonText
+                  title={tag.name}
+                  onClick={() => handleTagSelected(tag.name)}
+                  isActive={tagsSelected.includes(tag.name)}
+                />
+              </li>
+            ))
+          : null}
+        <Toggler
+          onClick={() => {
+            setShowTags(!showTags);
+          }}
+        >
+          {showTags ? <AiOutlineArrowUp /> : <AiOutlineArrowDown />}
+        </Toggler>
       </Menu>
       <Search>
         <Input
