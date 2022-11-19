@@ -104,14 +104,24 @@ function Home() {
       </Search>
       <Content>
         <Section title="Minhas Notas">
-          {notes &&
+          {notes.length ? (
             notes.map((note) => (
               <Note
                 key={String(note.id)}
                 data={note}
                 onClick={() => handleDetails(note.id)}
               />
-            ))}
+            ))
+          ) : (
+            <h3
+              style={{
+                width: "100%",
+                textAlign: "center",
+              }}
+            >
+              Não Existe Nota Criada :)
+            </h3>
+          )}
         </Section>
       </Content>
       <NewNote to="/new">
