@@ -1,14 +1,10 @@
 import { useState } from "react";
-
-import { Link } from "react-router-dom";
-
 import { FiLock, FiMail } from "react-icons/fi";
-import { Background, Container, Form } from "./styles";
-
+import { Link } from "react-router-dom";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
-
 import { useAuth } from "../../hooks/auth";
+import { Background, Container, Form } from "./styles";
 
 function Signin() {
   const [email, setEmail] = useState("");
