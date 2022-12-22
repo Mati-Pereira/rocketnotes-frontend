@@ -6,13 +6,14 @@ import { FiMail, FiLock, FiUser } from "react-icons/fi";
 import { useState } from "react";
 import { api } from "../../services/api";
 import { Controller, useForm } from "react-hook-form";
-import { Ring } from "@uiball/loaders";
+import { LineWobble } from "@uiball/loaders";
 
 function Signup() {
   // name, email, password
   const [isLoading, setIsLoading] = useState(false);
   const { handleSubmit, control } = useForm({
     defaultValues: {
+      name: "",
       email: "",
       password: "",
     },
@@ -21,9 +22,11 @@ function Signup() {
 
   const onSubmit = async ({ name, email, password }) => {
     try {
+      setIsLoading(true);
       await api.post("/users", { name, email, password });
       alert("Cadastro realizado com sucesso!");
       navigate(-1);
+      setIsLoading(false);
     } catch (error) {
       if (error.response) {
         alert(error.response.data.message);
@@ -83,7 +86,7 @@ function Signup() {
             <Input
               placeholder="Password"
               type="password"
-              icon={FiMail}
+              icon={FiLock}
               onChange={onChange}
               value={value}
               required
@@ -93,7 +96,9 @@ function Signup() {
         />
         <Button type="submit">
           {isLoading ? (
-            <Ring size={20} lineWeight={5} speed={2} color="black" />
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <LineWobble size={30} lineWeight={5} speed={2} color="black" />
+            </div>
           ) : (
             "Cadastrar"
           )}

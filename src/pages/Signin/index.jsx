@@ -5,7 +5,7 @@ import Input from "../../components/Input";
 import { useAuth } from "../../hooks/auth";
 import { Background, Container, Form } from "./styles";
 import { Controller, useForm } from "react-hook-form";
-import { Ring } from "@uiball/loaders";
+import { LineWobble } from "@uiball/loaders";
 import React, { useState } from "react";
 
 const Signin = () => {
@@ -27,7 +27,6 @@ const Signin = () => {
       setIsLoading(false);
     }, 2000);
   };
-  // <Ring size={40} lineWeight={5} speed={2} color="black" />
   const { signIn } = useAuth();
 
   return (
@@ -72,7 +71,9 @@ const Signin = () => {
         />
         <Button type="submit">
           {isLoading ? (
-            <Ring size={20} lineWeight={5} speed={2} color="black" />
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <LineWobble size={30} lineWeight={5} speed={2} color="black" />
+            </div>
           ) : (
             "Entrar"
           )}
