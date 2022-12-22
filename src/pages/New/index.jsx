@@ -12,6 +12,7 @@ import Section from "../../components/Section";
 import TextArea from "../../components/TextArea";
 
 import { Container, Form } from "./styles";
+import { toast } from "react-toastify";
 
 function New() {
   let navigate = useNavigate();
@@ -49,21 +50,21 @@ function New() {
 
   async function handleNewNote() {
     if (!title) {
-      return alert("Não foi colocado um título");
+      return toast.warning("Não foi colocado um título");
     }
 
     if (!description) {
-      return alert("Não foi colocado uma descrição");
+      return toast.warning("Não foi colocado uma descrição");
     }
 
     if (newTag) {
-      return alert(
+      return toast.warning(
         "Você deixou uma ou mais no campo para adicionar, mas não clicou em adicionar"
       );
     }
 
     if (newLink) {
-      return alert(
+      return toast.warning(
         "Você deixou uma ou mais no campo para adicionar, mas não clicou em adicionar"
       );
     }
@@ -74,7 +75,7 @@ function New() {
       links,
     });
 
-    alert("Nova Nota Adicionada");
+    toast.success("Nova Nota Adicionada");
     navigate(-1);
   }
 

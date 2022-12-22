@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { api } from "../services/api";
+import { toast } from "react-toastify";
 
 const AuthContext = createContext({});
 
@@ -15,9 +16,9 @@ function AuthProvider({ children }) {
       setData({ user, token });
     } catch (error) {
       if (error.response) {
-        alert(error.response.data.message);
+        toast.warning(error.response.data.message);
       } else {
-        alert("Signin Error");
+        toast.warning("Signin Error");
       }
     }
   }
@@ -38,12 +39,12 @@ function AuthProvider({ children }) {
       await api.put("/users", user);
       localStorage.setItem("@rocketnotes:user", JSON.stringify(user));
       setData({ user, token: data.token });
-      alert("Perfil Atualizado");
+      toast.success("Perfil Atualizado");
     } catch (error) {
       if (error.response) {
-        alert(error.response.data.message);
+        toast.warning(error.response.data.message);
       } else {
-        alert(
+        toast.warning(
           "Não foi possível atualizar. Por favor tente novamente mais tarde."
         );
       }
