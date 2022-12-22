@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useState } from "react";
-
 import { api } from "../services/api";
 
 export const AuthContext = createContext({});
@@ -10,10 +9,8 @@ function AuthProvider({ children }) {
     try {
       const response = await api.post("/sessions", { email, password });
       const { user, token } = response.data;
-
       localStorage.setItem("@rocketnotes:user", JSON.stringify(user));
       localStorage.setItem("@rocketnotes:token", token);
-
       api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       setData({ user, token });
     } catch (error) {
@@ -46,7 +43,9 @@ function AuthProvider({ children }) {
       if (error.response) {
         alert(error.response.data.message);
       } else {
-        alert("Signin Error");
+        alert(
+          "Não foi possível atualizar. Por favor tente novamente mais tarde."
+        );
       }
     }
   }
