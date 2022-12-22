@@ -7,9 +7,9 @@ import { useState } from "react";
 import { api } from "../../services/api";
 import { Controller, useForm } from "react-hook-form";
 import { LineWobble } from "@uiball/loaders";
+import { toast } from "react-toastify";
 
 function Signup() {
-  // name, email, password
   const [isLoading, setIsLoading] = useState(false);
   const { handleSubmit, control } = useForm({
     defaultValues: {
@@ -24,14 +24,43 @@ function Signup() {
     try {
       setIsLoading(true);
       await api.post("/users", { name, email, password });
-      alert("Cadastro realizado com sucesso!");
+      toast.success("Cadastro realizado com sucesso!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
       navigate(-1);
       setIsLoading(false);
     } catch (error) {
       if (error.response) {
-        alert(error.response.data.message);
+        toast.error(error.response.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        setIsLoading(false);
       } else {
-        alert("Erro no cadastro!");
+        toast.error("Erro no cadastro!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        setIsLoading(false);
       }
     }
   };
