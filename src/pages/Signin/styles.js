@@ -36,7 +36,7 @@ export const Form = styled.form`
   }
   @media screen and (max-width: 480px) {
     padding: 0 2rem;
-    gap: 0.5rem
+    gap: 0.5rem;
   }
 `;
 

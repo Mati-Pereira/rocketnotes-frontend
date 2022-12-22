@@ -1,7 +1,11 @@
 import { Container } from "./styles";
 
-function Button({title, ...rest}) {
-  return <Container type="button" {...rest}>{title}</Container>;
+function Button({ children, ...rest }) {
+  return (
+    <Container type="button" {...rest}>
+      {children}
+    </Container>
+  );
 }
 
 export default Button;

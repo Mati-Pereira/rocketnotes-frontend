@@ -1,50 +1,87 @@
-import { useState } from "react";
 import { FiLock, FiMail } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { useAuth } from "../../hooks/auth";
 import { Background, Container, Form } from "./styles";
+import { Controller, useForm } from "react-hook-form";
+import { Ring } from "@uiball/loaders";
+import React, { useState } from "react";
 
-function Signin() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const Signin = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const { handleSubmit, control } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
-  const { signIn } = useAuth();
-
-  function handleSignIn() {
+  const onSubmit = ({ email, password }) => {
+    setIsLoading(true);
     signIn({
       email,
       password,
     });
-  }
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  };
+  // <Ring size={40} lineWeight={5} speed={2} color="black" />
+  const { signIn } = useAuth();
 
   return (
     <Container>
-      <Form>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <h1>Rocket Notes</h1>
         <p>Aplicação para salvar e gerenciar seus links úteis</p>
         <h2>Faça seu login</h2>
-        <Input
-          placeholder="Email"
-          type="text"
-          icon={FiMail}
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, value } }) => (
+            <Input
+              placeholder="Email"
+              type="text"
+              icon={FiMail}
+              onChange={onChange}
+              value={value}
+              required
+            />
+          )}
+          name="email"
         />
-        <Input
-          placeholder="Senha"
-          type="password"
-          icon={FiLock}
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, value } }) => (
+            <Input
+              placeholder="Password"
+              type="password"
+              icon={FiLock}
+              onChange={onChange}
+              value={value}
+              required
+            />
+          )}
+          name="password"
         />
-        <Button title="Entrar" onClick={handleSignIn} />
+        <Button type="submit">
+          {isLoading ? (
+            <Ring size={20} lineWeight={5} speed={2} color="black" />
+          ) : (
+            "Entrar"
+          )}
+        </Button>
         <Link to="/register">Criar Conta</Link>
       </Form>
       <Background />
     </Container>
   );
-}
+};
 
 export default Signin;

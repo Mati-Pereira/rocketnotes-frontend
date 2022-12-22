@@ -26,8 +26,7 @@ function AuthProvider({ children }) {
   }
 
   function logOut() {
-    localStorage.removeItem("@rocketnotes:user");
-    localStorage.removeItem("@rocketnotes:token");
+    localStorage.clear();
     setData({});
   }
 
