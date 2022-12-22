@@ -25,7 +25,7 @@ const Signin = () => {
     });
     setTimeout(() => {
       setIsLoading(false);
-    }, 10000);
+    }, 100000);
   };
   const { signIn } = useAuth();
 
