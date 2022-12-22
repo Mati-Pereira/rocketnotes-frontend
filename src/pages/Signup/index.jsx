@@ -5,64 +5,99 @@ import { Link, useNavigate } from "react-router-dom";
 import { FiMail, FiLock, FiUser } from "react-icons/fi";
 import { useState } from "react";
 import { api } from "../../services/api";
+import { Controller, useForm } from "react-hook-form";
+import { Ring } from "@uiball/loaders";
 
 function Signup() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
+  // name, email, password
+  const [isLoading, setIsLoading] = useState(false);
+  const { handleSubmit, control } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
   const navigate = useNavigate();
 
-  const handleSignUp = () => {
-    if (!name || !email || !password) {
-      alert("Preencha Todos os Campos");
-      
-      return;
+  const onSubmit = async ({ name, email, password }) => {
+    try {
+      await api.post("/users", { name, email, password });
+      alert("Cadastro realizado com sucesso!");
+      navigate(-1);
+    } catch (error) {
+      if (error.response) {
+        alert(error.response.data.message);
+      } else {
+        alert("Erro no cadastro!");
+      }
     }
-    api
-      .post("/users", { name, email, password })
-      .then(() => {
-        alert("Cadastro realizado com sucesso!");
-        navigate(-1);
-      })
-      .catch((error) => {
-        if (error.response) {
-          alert(error.response.data.message);
-        } else {
-          alert("Erro no cadastro!");
-        }
-      });
   };
 
   return (
     <Container>
       <Background />
-      <Form>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <h1>Rocket Notes</h1>
         <p>Aplicação para salvar e gerenciar seus links úteis</p>
         <h2>Crie sua conta</h2>
-        <Input
-          placeholder="Nome"
-          type="text"
-          icon={FiUser}
-          onChange={(e) => setName(e.target.value)}
-          value={name}
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, value } }) => (
+            <Input
+              placeholder="Name"
+              type="text"
+              icon={FiUser}
+              onChange={onChange}
+              value={value}
+              required
+            />
+          )}
+          name="name"
         />
-        <Input
-          placeholder="Email"
-          type="text"
-          icon={FiMail}
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, value } }) => (
+            <Input
+              placeholder="Email"
+              type="email"
+              icon={FiMail}
+              onChange={onChange}
+              value={value}
+              required
+            />
+          )}
+          name="email"
         />
-        <Input
-          placeholder="Senha"
-          type="password"
-          icon={FiLock}
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, value } }) => (
+            <Input
+              placeholder="Password"
+              type="password"
+              icon={FiMail}
+              onChange={onChange}
+              value={value}
+              required
+            />
+          )}
+          name="password"
         />
-        <Button title="Cadastrar" onClick={handleSignUp} />
+        <Button type="submit">
+          {isLoading ? (
+            <Ring size={20} lineWeight={5} speed={2} color="black" />
+          ) : (
+            "Cadastrar"
+          )}
+        </Button>
         <Link to="/">Voltar para o Login</Link>
       </Form>
     </Container>
