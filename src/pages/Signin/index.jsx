@@ -6,7 +6,7 @@ import { useAuth } from "../../hooks/auth";
 import { Background, Container, Form } from "./styles";
 import { Controller, useForm } from "react-hook-form";
 import { LineWobble } from "@uiball/loaders";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const Signin = () => {
   const [isLoading, setIsLoading] = useState(false);
